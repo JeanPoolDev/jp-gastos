@@ -1,18 +1,24 @@
 import { useBudget } from "../hooks/useBudget";
+import ExpenseModal from "./ExpenseModal";
 
 export function BudgetMain() {
 
   const { state } = useBudget();
 
+  const fechaActual = () => {
+
+    const fecha = new Date();
+
+    const dia = fecha.getDate();
+    const mes = fecha.getMonth() + 1;
+
+    return `${dia}/${mes}`
+  }
+
   return (
-    <section className="max-w-3xl m-auto py-10">
+    <section className="max-w-3xl m-auto py-10 space-y-8">
 
-      <div className="flex justify-between items-center">
-
-        <div>
-          <p className="text-zinc-500 text-lg">Buenos Días.</p>
-          <h1 className="text-white text-xl">{state.budget[0].name}</h1>
-        </div>
+      <div className="flex justify-around items-center">
 
         <div className="w-[10%] border-white">
           <img
@@ -21,6 +27,27 @@ export function BudgetMain() {
             alt="logo principal" />
         </div>
 
+        <h1 className="text-2xl font-semibold">{state.budget[0].name}</h1>
+
+        <div>
+          <ExpenseModal />
+        </div>
+
+      </div>
+
+      <div className="flex justify-between bg-[#db7e5d] h-[200px] rounded-bl-3xl rounded-tr-3xl p-8">
+        <div className="flex flex-col justify-between">
+          <p className="text-2xl font-semibold">Presupuesto</p>
+          <p className="text-5xl font-bold">S/1200.00</p>
+        </div>
+
+        <div className="flex items-end">
+          <p className="text-2xl font-semibold">{fechaActual()}</p>
+        </div>
+      </div>
+
+      <div>
+        <h1 className="text-2xl font-bold">Lista de Gasto</h1>
       </div>
 
     </section>

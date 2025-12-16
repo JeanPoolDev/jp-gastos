@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { categories } from "../data/categories";
-import type { expense } from "../interfaces";
+import type { Expense } from "../interfaces";
+import { useBudget } from "../hooks/useBudget";
 
-const initialState = (): expense => ({
+const initialState = (): Expense => ({
   amount: 0,
   category: '',
   date: '',
@@ -12,6 +13,7 @@ const initialState = (): expense => ({
 export function ExpenseForm() {
 
   const [{ amount, category, date, name }, setExpense] = useState(initialState);
+  const { dispatch } = useBudget();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
@@ -28,8 +30,16 @@ export function ExpenseForm() {
     })
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    dispatch({ type: 'add-expense', payload: { newExpense: { amount, category, date, name } } });
+
+    // TODO: LIMPIAR EL FORMULARIO
+  }
+
   return (
-    <form className="space-y-5">
+    <form className="space-y-5" onSubmit={handleSubmit}>
 
       <h1 className="font-bold text-3xl border-b-4 w-1/2">
         Nuevo Gasto

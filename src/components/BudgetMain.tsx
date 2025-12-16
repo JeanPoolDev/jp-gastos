@@ -1,4 +1,5 @@
 import { useBudget } from "../hooks/useBudget";
+import { ExpenseCard } from "./ExpenseCard";
 import ExpenseModal from "./ExpenseModal";
 
 export function BudgetMain() {
@@ -46,9 +47,17 @@ export function BudgetMain() {
         </div>
       </div>
 
-      <div>
-        <h1 className="text-2xl font-bold">Lista de Gasto</h1>
-      </div>
+      <section>
+        <h1 className="text-2xl font-bold mb-5">Lista de Gasto</h1>
+
+        <div className="space-y-5">
+          {
+            state.expense.map(expense => (
+              <ExpenseCard key={expense.name} expense={expense} />
+            ))
+          }
+        </div>
+      </section>
 
     </section>
   );

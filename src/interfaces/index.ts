@@ -4,7 +4,7 @@ export type Budget = {
   name: string;
 }
 
-export type expense = {
+export type Expense = {
   name: string;
   amount: number;
   category: string;

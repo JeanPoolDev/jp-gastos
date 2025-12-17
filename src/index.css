@@ -36,3 +36,23 @@ main {
   width: 1px;
   height: 100%;
 }
+
+
+
+/*** SWIPE LIST OVERRIDES **/
+.swipeable-list-item__leading-actions,
+.swipeable-list-item__trailing-actions {
+  @apply text-lg uppercase font-bold;
+}
+
+.swipeable-list-item__leading-actions {
+  @apply border border-t border-l-transparent border-b border-r-transparent;
+}
+
+.swipeable-list-item__trailing-actions {
+  @apply border border-t border-r-transparent border-b border-l-transparent;
+}
+
+.swipeable-list .swipe-action {
+  @apply flex justify-center items-center
+}

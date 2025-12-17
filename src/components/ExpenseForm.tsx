@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
-import type { Expense } from "../interfaces";
+import type { DraftExpense } from "../interfaces";
 import { useBudget } from "../hooks/useBudget";
 
-const initialState = (): Expense => ({
+const initialState = (): DraftExpense => ({
   amount: 0,
   category: '',
   date: '',
@@ -13,7 +13,16 @@ const initialState = (): Expense => ({
 export function ExpenseForm() {
 
   const [{ amount, category, date, name }, setExpense] = useState(initialState);
-  const { dispatch } = useBudget();
+  const { state, dispatch } = useBudget();
+
+  useEffect(() => {
+    if (!state.editingId) return;
+
+    const editingExpense = state.expense.find(exp => exp.id === state.editingId);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (editingExpense) setExpense(editingExpense);
+
+  }, [state.editingId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
@@ -33,9 +42,14 @@ export function ExpenseForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch({ type: 'add-expense', payload: { newExpense: { amount, category, date, name } } });
+    if (state.editingId) {
+      dispatch({ type: 'edit-expense', payload: { expense: { id: state.editingId, amount, category, date, name } } })
+    } else {
+      dispatch({ type: 'add-expense', payload: { newExpense: { amount, category, date, name } } })
+    }
 
     // TODO: LIMPIAR EL FORMULARIO
+    initialState()
   }
 
   return (

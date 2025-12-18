@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
 import type { DraftExpense } from "../interfaces";
 import { useBudget } from "../hooks/useBudget";
-import { BannerError } from "./bannerError";
+import { BannerError } from "./BannerError";
 
 const initialState = (): DraftExpense => ({
   amount: 0,

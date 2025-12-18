@@ -1,4 +1,6 @@
+import { formatNumber } from "../helpers";
 import { useBudget } from "../hooks/useBudget";
+import { CommingSoon } from "./CommingSoon";
 import { ExpenseCard } from "./ExpenseCard";
 import ExpenseModal from "./ExpenseModal";
 
@@ -7,7 +9,6 @@ export function BudgetMain() {
   const { state } = useBudget();
 
   const fechaActual = () => {
-
     const fecha = new Date();
 
     const dia = fecha.getDate();
@@ -15,6 +16,12 @@ export function BudgetMain() {
 
     return `${dia}/${mes}`
   }
+
+  const presuestoTotal = () => {
+    const total = state.expense.reduce((acc, curret) => acc + curret.amount, 0);
+    return state.budget.amount - total
+  };
+
 
   return (
     <section className="max-w-3xl m-auto py-10 space-y-8">
@@ -28,7 +35,7 @@ export function BudgetMain() {
             alt="logo principal" />
         </div>
 
-        <h1 className="text-2xl font-semibold">{state.budget[0].name}</h1>
+        <h1 className="text-2xl font-semibold">{state.budget.name}</h1>
 
         <div>
           <ExpenseModal />
@@ -36,16 +43,18 @@ export function BudgetMain() {
 
       </div>
 
-      <div className="flex justify-between bg-[#db7e5d] h-[200px] rounded-bl-3xl rounded-tr-3xl p-8">
+      <div className="flex justify-between bg-[#ea7a53] h-[200px] rounded-bl-3xl rounded-tr-3xl p-8">
         <div className="flex flex-col justify-between">
           <p className="text-2xl font-semibold">Presupuesto</p>
-          <p className="text-5xl font-bold">S/1200.00</p>
+          <p className="text-5xl font-bold">{formatNumber(presuestoTotal())}</p>
         </div>
 
         <div className="flex items-end">
           <p className="text-2xl font-semibold">{fechaActual()}</p>
         </div>
       </div>
+
+      <CommingSoon />
 
       <section>
         <h1 className="text-2xl font-bold mb-5">Lista de Gasto</h1>

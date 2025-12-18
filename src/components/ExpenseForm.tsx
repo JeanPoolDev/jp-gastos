@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { categories } from "../data/categories";
 import type { DraftExpense } from "../interfaces";
 import { useBudget } from "../hooks/useBudget";
+import { BannerError } from "./bannerError";
 
 const initialState = (): DraftExpense => ({
   amount: 0,
@@ -12,8 +13,9 @@ const initialState = (): DraftExpense => ({
 
 export function ExpenseForm() {
 
-  const [{ amount, category, date, name }, setExpense] = useState(initialState);
+  const [expense, setExpense] = useState(initialState);
   const { state, dispatch } = useBudget();
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     if (!state.editingId) return;
@@ -42,15 +44,22 @@ export function ExpenseForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (Object.values(expense).includes('')) {
+      setError('Todos los campos tienen que estar llenado crack');
+      return;
+    }
+
+
     if (state.editingId) {
-      dispatch({ type: 'edit-expense', payload: { expense: { id: state.editingId, amount, category, date, name } } })
+      dispatch({ type: 'edit-expense', payload: { expense: { id: state.editingId, ...expense } } })
     } else {
-      dispatch({ type: 'add-expense', payload: { newExpense: { amount, category, date, name } } })
+      dispatch({ type: 'add-expense', payload: { newExpense: expense } })
     }
 
     // TODO: LIMPIAR EL FORMULARIO
     initialState()
   }
+
 
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
@@ -59,12 +68,14 @@ export function ExpenseForm() {
         Nuevo Gasto
       </h1>
 
+      {error && <BannerError />}
+
       <div className="grid grid-cols-1 space-y-2">
         <label htmlFor="name">Nombre del Gasto :</label>
         <input
           type="text"
           id="name"
-          value={name}
+          value={expense.name}
           onChange={handleChange}
           autoComplete="off"
           className="p-2 border-2 rounded-xl"
@@ -74,9 +85,9 @@ export function ExpenseForm() {
       <div className="grid grid-cols-1 space-y-2">
         <label htmlFor="amount">Cantidad :</label>
         <input
-          type="text"
+          type="number"
           id="amount"
-          value={amount}
+          value={expense.amount}
           onChange={handleChange}
           autoComplete="off"
           className="p-2 border-2 rounded-xl"
@@ -87,7 +98,7 @@ export function ExpenseForm() {
         <label htmlFor="category">Cateogia :</label>
         <select
           id="category"
-          value={category}
+          value={expense.category}
           onChange={handleChange}
           className="p-2 border-2 rounded-xl">
           <option value=""> -- Seleccione -- </option>
@@ -106,7 +117,7 @@ export function ExpenseForm() {
         <input
           type="date"
           id="date"
-          value={date}
+          value={expense.date}
           onChange={handleChange}
           className="p-2 border-2 rounded-xl"
         />

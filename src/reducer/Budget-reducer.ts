@@ -10,14 +10,17 @@ export type BudgetAcions =
   { type: 'toogle-modal' }
 
 export type BudgetState = {
-  budget: Budget[];
+  budget: Budget;
   modal: boolean;
   expense: Expense[];
   editingId: Expense["id"];
 }
 
 export const initialValue: BudgetState = {
-  budget: [],
+  budget: {
+    amount: 0,
+    name: ''
+  },
   expense: [],
   modal: false,
   editingId: ''
@@ -38,7 +41,7 @@ export const BudgetReducer = (
   if (action.type === 'budget-add') {
     return {
       ...state,
-      budget: [...state.budget, action.payload.newBudget]
+      budget: action.payload.newBudget
     }
   }
 
@@ -62,7 +65,8 @@ export const BudgetReducer = (
       expense: state.expense.map(exp => exp.id === updateExpense.id
         ? updateExpense
         : exp),
-      modal: false
+      modal: false,
+      editingId: ''
     }
   }
 

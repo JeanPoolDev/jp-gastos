@@ -6,7 +6,7 @@ function App() {
 
   const { state } = useBudget();
 
-  const ifExistBudget = state.budget.length > 0;
+  const ifExistBudget = state.budget.amount > 0;
 
   return (
     <>

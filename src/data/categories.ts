@@ -5,5 +5,5 @@ export const categories = [
   { id: '4', color: '#f59e7d', name: 'Gastos Varios', icon: 'gastos' },
   { id: '5', color: '#c084fc', name: 'Ocio', icon: 'ocio' },
   { id: '6', color: '#f1b7d1', name: 'Salud', icon: 'salud' },
-  { id: '7', color: '#3f3f46', name: 'Suscripciones', icon: 'suscripciones' },
+  { id: '7', color: '#14b8a6', name: 'Suscripciones', icon: 'suscripciones' },
 ];

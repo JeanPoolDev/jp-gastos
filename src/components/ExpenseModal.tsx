@@ -10,7 +10,7 @@ export default function ExpenseModal() {
 
   return (
     <>
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center">
         <button
           className='w-12 h-12 border-2 border-[#988e6b] rounded-full cursor-pointer flex justify-center items-center'
           onClick={() => dispatch({ type: 'toogle-modal' })}

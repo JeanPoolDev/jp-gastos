@@ -7,6 +7,7 @@ export type BudgetAcions =
   { type: 'delete-expense', payload: { id: Expense['id'] } } |
   { type: 'edit-expense', payload: { expense: Expense } } |
   { type: 'set-id', payload: { id: Expense['id'] } } |
+  { type: 'set-categoryId', payload: { id: Expense['id'] } } |
   { type: 'toogle-modal' }
 
 export type BudgetState = {
@@ -14,6 +15,7 @@ export type BudgetState = {
   modal: boolean;
   expense: Expense[];
   editingId: Expense["id"];
+  categoryId: Expense["category"];
 }
 
 export const initialValue: BudgetState = {
@@ -23,7 +25,8 @@ export const initialValue: BudgetState = {
   },
   expense: [],
   modal: false,
-  editingId: ''
+  editingId: '',
+  categoryId: ''
 }
 
 const createExpense = (drafExpense: DraftExpense): Expense => {
@@ -82,6 +85,13 @@ export const BudgetReducer = (
       ...state,
       editingId: action.payload.id,
       modal: true
+    }
+  }
+
+  if (action.type === 'set-categoryId') {
+    return {
+      ...state,
+      categoryId: action.payload.id
     }
   }
 

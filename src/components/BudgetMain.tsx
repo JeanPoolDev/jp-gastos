@@ -1,6 +1,7 @@
 import { formatNumber } from "../helpers";
 import { useBudget } from "../hooks/useBudget";
-import { CommingSoon } from "./CommingSoon";
+import { BudgetFilters } from "./BudgetFilters";
+// import { CommingSoon } from "./CommingSoon";
 import { ExpenseCard } from "./ExpenseCard";
 import ExpenseModal from "./ExpenseModal";
 
@@ -17,12 +18,16 @@ export function BudgetMain() {
     return `${dia}/${mes}`
   }
 
+  const expenseFilter = state.categoryId
+    ? state.expense.filter(exp => exp.category === state.categoryId)
+    : state.expense;
+
   return (
     <section className="max-w-3xl m-auto py-10 space-y-8 px-5 md:px-0">
 
       <div className="flex justify-around items-center">
 
-        <div className="w-[10%] border-white">
+        <div className="w-[15%] md:w-[10%] border-white">
           <img
             className="w-full h-full object-cover rounded-full"
             src="https://i.pinimg.com/1200x/60/ef/ff/60effff1052085826c1eda5c1db835e6.jpg"
@@ -49,14 +54,16 @@ export function BudgetMain() {
         </div>
       </div>
 
-      <CommingSoon />
+      {/* <CommingSoon /> */}
+
+      <BudgetFilters />
 
       <section>
         <h1 className="text-2xl font-bold mb-5">Lista de Gasto</h1>
 
         <div className="space-y-5">
           {
-            state.expense.map(expense => (
+            expenseFilter.map(expense => (
               <ExpenseCard key={expense.name} expense={expense} />
             ))
           }

@@ -14,7 +14,7 @@ export function CommingSoon() {
         <div className="border-2 border-[#988e6b]  p-5 rounded-4xl shrink-0 min-w-[260px]">
           <div className="flex gap-5 justify-between items-center mb-3">
             <div className="glassMorphismo w-17 h-15 flex justify-center 
-              items-center rounded-2xl border">
+              items-center rounded-2xl outline">
               N
             </div>
             <div className=" w-3/4">
@@ -31,7 +31,7 @@ export function CommingSoon() {
         <div className="border-2 border-[#988e6b]  p-5 rounded-4xl shrink-0 min-w-[260px]">
           <div className="flex gap-5 justify-between items-center mb-3">
             <div className="glassMorphismo w-17 h-15 flex justify-center 
-              items-center rounded-2xl border">
+              items-center rounded-2xl outline">
               C
             </div>
             <div className=" w-3/4">

@@ -1,16 +1,17 @@
 export function CommingSoon() {
   return (
-    <div>
+    <div className="relative">
       <div className="flex justify-between items-center mb-2">
         <h1 className="text-2xl font-bold">Muy Pronto</h1>
         <button className="font-semibold border-2 border-[#988e6b] rounded-full 
-          px-4 py-3 cursor-pointer">
+          px-3 py-2 md:px-4 md:py-3 cursor-pointer">
           Ver más
         </button>
       </div>
 
-      <div className="flex gap-5">
-        <div className="border-2 border-[#988e6b]  p-5 rounded-4xl">
+      <div className="flex gap-5 overflow-x-auto">
+
+        <div className="border-2 border-[#988e6b]  p-5 rounded-4xl shrink-0 min-w-[260px]">
           <div className="flex gap-5 justify-between items-center mb-3">
             <div className="glassMorphismo w-17 h-15 flex justify-center 
               items-center rounded-2xl border">
@@ -27,7 +28,7 @@ export function CommingSoon() {
           </div>
         </div>
 
-        <div className="border-2 border-[#988e6b]  p-5 rounded-4xl">
+        <div className="border-2 border-[#988e6b]  p-5 rounded-4xl shrink-0 min-w-[260px]">
           <div className="flex gap-5 justify-between items-center mb-3">
             <div className="glassMorphismo w-17 h-15 flex justify-center 
               items-center rounded-2xl border">

@@ -4,7 +4,7 @@ import { BudgetReducer, initialValue, type BudgetAcions, type BudgetState } from
 interface PropsContext {
   state: BudgetState,
   dispatch: Dispatch<BudgetAcions>,
-  // presupuestoTotal: () => number
+  montoTotalGastado: number
 }
 
 export const BudgetContext = createContext<PropsContext>(null!);
@@ -17,17 +17,15 @@ export function BudgetProvider({ children }: PropProvider) {
 
   const [state, dispatch] = useReducer(BudgetReducer, initialValue);
 
-  // const presupuestoTotal = () => {
-  //   const total = state.expense.reduce((acc, curret) => acc + curret.amount, 0);
-  //   return state.budget.amount - total
-  // };
+  const total = state.expense.reduce((acc, curret) => acc + curret.amount, 0);
+  const montoTotalGastado = state.budget.amount - total
 
   return (
     <BudgetContext.Provider
       value={{
         state,
         dispatch,
-        // presupuestoTotal
+        montoTotalGastado
       }}
     >
       {children}

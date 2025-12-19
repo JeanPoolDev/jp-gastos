@@ -14,16 +14,20 @@ const initialState = (): DraftExpense => ({
 export function ExpenseForm() {
 
   const [expense, setExpense] = useState(initialState);
-  const { state, dispatch } = useBudget();
+  const { state, dispatch, montoTotalGastado } = useBudget();
   const [error, setError] = useState<string>('');
+  const [prevMount, setPrevMount] = useState<number>(0);
 
   useEffect(() => {
     if (!state.editingId) return;
 
     const editingExpense = state.expense.find(exp => exp.id === state.editingId);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (editingExpense) setExpense(editingExpense);
 
+    if (editingExpense) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setExpense(editingExpense);
+      setPrevMount(editingExpense.amount);
+    }
   }, [state.editingId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
@@ -49,6 +53,11 @@ export function ExpenseForm() {
       return;
     }
 
+    if ((expense.amount - prevMount) > montoTotalGastado) {
+      setError("No tienes dinero sufienciente :'(")
+      return;
+    }
+
 
     if (state.editingId) {
       dispatch({ type: 'edit-expense', payload: { expense: { id: state.editingId, ...expense } } })
@@ -68,7 +77,7 @@ export function ExpenseForm() {
         Nuevo Gasto
       </h1>
 
-      {error && <BannerError />}
+      {error && <BannerError>{error}</BannerError>}
 
       <div className="grid grid-cols-1 space-y-2">
         <label htmlFor="name">Nombre del Gasto :</label>

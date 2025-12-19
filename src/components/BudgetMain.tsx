@@ -6,7 +6,7 @@ import ExpenseModal from "./ExpenseModal";
 
 export function BudgetMain() {
 
-  const { state } = useBudget();
+  const { state, montoTotalGastado } = useBudget();
 
   const fechaActual = () => {
     const fecha = new Date();
@@ -17,14 +17,8 @@ export function BudgetMain() {
     return `${dia}/${mes}`
   }
 
-  const presuestoTotal = () => {
-    const total = state.expense.reduce((acc, curret) => acc + curret.amount, 0);
-    return state.budget.amount - total
-  };
-
-
   return (
-    <section className="max-w-3xl m-auto py-10 space-y-8">
+    <section className="max-w-3xl m-auto py-10 space-y-8 px-5 md:px-0">
 
       <div className="flex justify-around items-center">
 
@@ -43,14 +37,15 @@ export function BudgetMain() {
 
       </div>
 
-      <div className="flex justify-between bg-[#ea7a53] h-[200px] rounded-bl-3xl rounded-tr-3xl p-8">
+      <div className="flex justify-between bg-[#ea7a53] h-[130px] md:h-[200px] rounded-bl-3xl rounded-tr-3xl 
+      p-6 md:p-8">
         <div className="flex flex-col justify-between">
-          <p className="text-2xl font-semibold">Presupuesto</p>
-          <p className="text-5xl font-bold">{formatNumber(presuestoTotal())}</p>
+          <p className="text-lg md:text-2xl font-semibold">Presupuesto</p>
+          <p className="text-3xl md:text-5xl font-bold">{formatNumber(montoTotalGastado)}</p>
         </div>
 
         <div className="flex items-end">
-          <p className="text-2xl font-semibold">{fechaActual()}</p>
+          <p className="text-xl md:text-2xl font-semibold">{fechaActual()}</p>
         </div>
       </div>
 

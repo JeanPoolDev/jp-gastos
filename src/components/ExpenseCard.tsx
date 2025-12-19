@@ -51,20 +51,20 @@ export function ExpenseCard({ expense }: Props) {
       >
         <div
           style={{ backgroundColor: findCategory(expense.category) }}
-          className="flex justify-between h-[150px] rounded-bl-3xl w-full
-                rounded-tr-3xl p-8 select-none">
-          <div className="flex gap-5">
-            <div className="w-20 rounded-xl flex items-center justify-center glassMorphismo">
-              <p className="text-5xl font-bold">{expense.name.charAt(0).toUpperCase()}</p>
+          className="flex justify-between h-[120px] md:h-[150px] rounded-bl-3xl w-full
+                rounded-tr-3xl p-6 md:p-8 select-none">
+          <div className="flex gap-5 items-center justify-center">
+            <div className="w-17 h-17 md:w-22 md:h-22 rounded-xl flex items-center justify-center glassMorphismo">
+              <p className="text-2xl md:text-5xl font-bold">{expense.name.charAt(0).toUpperCase()}</p>
             </div>
-            <div className="flex flex-col justify-around">
-              <h2 className="font-bold text-2xl">{expense.name}</h2>
-              <p className="text-lg">{expense.date}</p>
+            <div className="flex flex-col justify-around h-full">
+              <h2 className="font-bold text-lg md:text-2xl">{expense.name}</h2>
+              <p className="text-base md:text-lg">{expense.date}</p>
             </div>
           </div>
-          <div className="flex flex-col justify-around items-end">
-            <h2 className="font-bold text-2xl">{formatNumber(expense.amount)}</h2>
-            <p className="text-lg">por mes</p>
+          <div className="flex flex-col justify-around items-end h-full">
+            <h2 className="font-bold text-lg md:text-2xl">{formatNumber(expense.amount)}</h2>
+            <p className="text-base md:text-lg">por mes</p>
           </div>
         </div>
       </SwipeableListItem>

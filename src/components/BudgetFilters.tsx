@@ -31,7 +31,7 @@ export function BudgetFilters() {
               appearance-none">
           <option value="">Todos</option>
           {categories.map(cat => (
-            <option value={cat.id} >{cat.name}</option>
+            <option value={cat.id} key={cat.id} >{cat.name}</option>
           ))}
         </select>
       </div>

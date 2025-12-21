@@ -31,55 +31,60 @@ export function BudgetForm() {
 
 
   return (
-    <main className="flex">
+    <main className="flex h-screen bg-[#f5f2eb] items-center justify-center">
 
-      <article className="w-1/2 flex justify-center">
-        <div className="w-full glassMorphismo p-40 space-y-10 flex flex-col justify-center">
+      <div className="shadow h-[500px] w-[350px] md:w-[400px] rounded-4xl px-6 md:px-10 py-8 bg-white 
+      space-y-8">
 
-          <div className="space-y-4">
-            <h1 className="text-[#e394b5] font-bold text-5xl">
-              !Listo para comenzar!
-            </h1>
-            <p className="text-white font-semibold">
-              Crea una cuenta para manejar tus gatos
-            </p>
-          </div>
-          <form className="space-y-10" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 text-white gap-3 text-lg">
-              <label htmlFor="name">Tu Nombre :</label>
+        <div className="text-center space-y-2">
+          <h1 className="font-bold text-2xl">Control de Gastos</h1>
+          <p className="text-sm">Controla tus gastos desde un solo lugar.</p>
+        </div>
+
+        <div className="mb-15">
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 gap-1">
+              <label htmlFor="name" className="text-sm">Ingresé su Nombre :</label>
               <input
                 type="text"
                 id="name"
                 value={name}
                 onChange={handleChange}
-                className="border-2 p-2 rounded-lg bg-transparent focus:outline-none" autoComplete="off" />
+                className="border border-[#f5f2eb] shadow py-1 px-4 rounded-lg" autoComplete="off" />
             </div>
 
-            <div className="grid grid-cols-1 text-white gap-3 text-lg">
-              <label htmlFor="amount">Tu Presupuesto :</label>
+            <div className="grid grid-cols-1 gap-1">
+              <label htmlFor="name" className="text-sm">Ingresé su Saldo :</label>
               <input
                 type="text"
                 id="amount"
                 value={amount}
                 onChange={handleChange}
-                className="border-2 p-2 rounded-lg bg-transparent focus:outline-none" autoComplete="off" />
+                className="border border-[#f5f2eb] shadow py-1 px-4 rounded-lg" autoComplete="off" />
             </div>
 
-            <div className="flex justify-end">
+            <div className="text-sm font-semibold">
+              <p>Recuerda el saldo es mensual</p>
+            </div>
+
+            <div className="flex">
               <button
-                className="px-4 py-3 bg-[#e394b5] text-white font-semibold 
-          rounded-lg cursor-pointer">
+                className="px-4 py-2 bg-[#fec984] font-semibold
+           rounded-lg cursor-pointer flex-1">
                 Comenzar
               </button>
             </div>
           </form>
         </div>
-      </article>
 
-      <div className="w-1/2">
-        <img src="/logofondo.png" className="w-full h-full bg-cover" draggable="false" />
+        <div className="text-center">
+          <p className="text-sm">Copyright @Jp 2025 | <span className="font-semibold">Politica Privacidad</span></p>
+        </div>
+
       </div>
 
-    </main>
+    </main >
   );
 };
+
+

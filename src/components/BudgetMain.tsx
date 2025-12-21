@@ -7,7 +7,7 @@ import ExpenseModal from "./ExpenseModal";
 
 export function BudgetMain() {
 
-  const { state, montoTotalGastado } = useBudget();
+  const { state, montoTotalGastado, dispatch } = useBudget();
 
   const fechaActual = () => {
     const fecha = new Date();
@@ -22,16 +22,19 @@ export function BudgetMain() {
     ? state.expense.filter(exp => exp.category === state.categoryId)
     : state.expense;
 
+  const logoNombre = state.budget.name.charAt(0).toUpperCase();
+
   return (
     <section className="max-w-3xl m-auto py-10 space-y-8 px-5 md:px-0">
 
       <div className="flex justify-around items-center">
 
-        <div className="w-[15%] md:w-[10%] border-white">
-          <img
-            className="w-full h-full object-cover rounded-full"
-            src="https://i.pinimg.com/1200x/60/ef/ff/60effff1052085826c1eda5c1db835e6.jpg"
-            alt="logo principal" />
+        <div className="w-14 h-14">
+          <button
+            onClick={() => dispatch({ type: 'reset-app' })}
+            className="cursor-pointer w-full h-full rounded-full border bg-black text-white font-bold">
+            {logoNombre}
+          </button>
         </div>
 
         <h1 className="text-2xl font-semibold">{state.budget.name}</h1>

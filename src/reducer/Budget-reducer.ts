@@ -8,6 +8,7 @@ export type BudgetAcions =
   { type: 'edit-expense', payload: { expense: Expense } } |
   { type: 'set-id', payload: { id: Expense['id'] } } |
   { type: 'set-categoryId', payload: { id: Expense['id'] } } |
+  { type: 'reset-app' } |
   { type: 'toogle-modal' }
 
 export type BudgetState = {
@@ -106,6 +107,19 @@ export const BudgetReducer = (
     return {
       ...state,
       modal: !state.modal
+    }
+  }
+
+  if (action.type === 'reset-app') {
+    return {
+      budget: {
+        name: '',
+        amount: 0
+      },
+      expense: [],
+      modal: false,
+      editingId: '',
+      categoryId: ''
     }
   }
 
